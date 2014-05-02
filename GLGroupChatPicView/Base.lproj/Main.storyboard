@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="3io-Fv-gbM">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <scenes>
+        <!--Session List Controller - Sessions-->
+        <scene sceneID="fg3-D4-ovs">
+            <objects>
+                <tableViewController id="T1Y-Q7-8eT" customClass="SessionListController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="sIN-Xa-s3O">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell_identifier" rowHeight="70" id="rll-9h-Qcq" customClass="SessionCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="70"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rll-9h-Qcq" id="y9d-Bs-TFU">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJQ-Y3-mJC" userLabel="members_image" customClass="GLGroupChatPicView">
+                                            <rect key="frame" x="10" y="10" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="2oa-eY-K4N"/>
+                                                <constraint firstAttribute="height" constant="50" id="N5L-2p-1Do"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71B-V4-u5f" userLabel="groupName">
+                                            <rect key="frame" x="70" y="10" width="230" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="1tl-wY-Vi2"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                            <color key="textColor" red="0.18823529411764706" green="0.20392156862745098" blue="0.23137254901960785" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="71B-V4-u5f" firstAttribute="leading" secondItem="iJQ-Y3-mJC" secondAttribute="trailing" constant="10" id="96g-sD-6mH"/>
+                                        <constraint firstAttribute="trailing" secondItem="71B-V4-u5f" secondAttribute="trailing" constant="20" id="Dcp-QN-dvS"/>
+                                        <constraint firstItem="iJQ-Y3-mJC" firstAttribute="leading" secondItem="y9d-Bs-TFU" secondAttribute="leading" constant="10" id="Let-9a-ydQ"/>
+                                        <constraint firstItem="iJQ-Y3-mJC" firstAttribute="top" secondItem="y9d-Bs-TFU" secondAttribute="top" constant="10" id="Msp-CX-LzD"/>
+                                        <constraint firstItem="71B-V4-u5f" firstAttribute="top" secondItem="y9d-Bs-TFU" secondAttribute="top" constant="10" id="fxp-OZ-wQs"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="groupNameLabel" destination="71B-V4-u5f" id="LyL-kT-cSN"/>
+                                    <outlet property="membersImageView" destination="iJQ-Y3-mJC" id="EH1-Z5-SYk"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="T1Y-Q7-8eT" id="vsL-Mk-Ht5"/>
+                            <outlet property="delegate" destination="T1Y-Q7-8eT" id="af7-Tt-wgG"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Sessions" id="2cu-XR-D8n"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sVO-Vy-eDs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="697" y="-226"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="iaX-WE-2Vs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3io-Fv-gbM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6S1-gb-Tav">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="T1Y-Q7-8eT" kind="relationship" relationship="rootViewController" id="Unz-bS-dds"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T8V-KT-458" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="171" y="-226"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
