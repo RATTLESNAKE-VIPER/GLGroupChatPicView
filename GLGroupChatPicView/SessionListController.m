@@ -87,7 +87,6 @@
     //// update layout
     SessionCell *cell = (SessionCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentSessions.count - 1 inSection:0]];
     [cell prepareCellWithData:session];
-    [cell.membersImageView updateLayout];
 }
 
 - (NSString*)generateRandomString:(int)num {
