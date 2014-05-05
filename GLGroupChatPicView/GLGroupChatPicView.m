@@ -8,8 +8,6 @@
 
 #import "GLGroupChatPicView.h"
 
-
-
 @interface GLGroupChatPicView()
 @property (nonatomic, assign) NSUInteger totalCount;
 
@@ -64,7 +62,10 @@
         if (image) {
             [self.images addObject:image];
         } else if (initials) {
-            [self addInitials:initials];
+            if (initials && initials.length) {
+                NSString *firstLetter = [[initials substringToIndex:1] capitalizedString];
+                [self addInitials:firstLetter];
+            }
         }
     } else {
         if (self.totalCount >= 4) {
@@ -80,26 +81,24 @@
 
 - (void)addInitials:(NSString *)initials
 {
-    if (initials) {
-        NSString *firstLetter = [[initials substringToIndex:1] capitalizedString];
-        if (firstLetter && firstLetter.length) {
-            CGFloat width = 0;
-            CGSize size = self.frame.size;
-            
-            if (self.totalCount == 0) {
-                width = floorf(size.width);
-            } else if (self.totalCount == 1) {
-                width = floorf(size.width * 0.7);
-            } else if (self.totalCount == 2) {
-                width = floorf(size.width * 0.5);
-            } else if (self.totalCount > 2) {
-                width = floorf(size.width * 0.5);
-            }
-            
-            UIImage *image = [self imageFromText:firstLetter forSize:CGSizeMake(width, width)];
-            if (image) {
-                [self.images addObject:image];
-            }
+    if (initials && initials.length) {
+        CGFloat width = 0;
+        CGSize size = self.frame.size;
+        
+        if (self.totalCount == 0) {
+            width = floorf(size.width);
+        } else if (self.totalCount == 1) {
+            width = floorf(size.width * 0.7);
+        } else if (self.totalCount == 2) {
+            width = floorf(size.width * 0.5);
+        } else if (self.totalCount > 2) {
+            width = floorf(size.width * 0.5);
+        }
+        
+        CGFloat fontSize = initials.length == 1 ? width * 0.6 : width * 0.5;
+        UIImage *image = [self imageFromText:initials withCanvasSize:CGSizeMake(width, width) andFontSize:fontSize];
+        if (image) {
+            [self.images addObject:image];
         }
     }
 }
@@ -146,7 +145,7 @@
             
         } else if (self.images.count == 3) {
             width = floorf(size.width * 0.5);
-
+            
             self.imageLayer1.contents = (id)((UIImage *)self.images[0]).CGImage;
             self.imageLayer1.frame = CGRectMake((size.width - width) * 0.5, 1.5, width, width);
             self.imageLayer1.cornerRadius = width * 0.5;
@@ -230,11 +229,11 @@
     return mImageLayer;
 }
 
-- (UIImage *)imageFromText:(NSString *)text forSize:(CGSize)size
+- (UIImage *)imageFromText:(NSString *)text withCanvasSize:(CGSize)canvasSize andFontSize:(CGFloat)fontSize
 {
     if (UIGraphicsBeginImageContextWithOptions) {
         CGFloat imageScale = 0.0f;
-        UIGraphicsBeginImageContextWithOptions(size, NO, imageScale);
+        UIGraphicsBeginImageContextWithOptions(canvasSize, NO, imageScale);
     }
     else {
         UIGraphicsBeginImageContext(self.frame.size);
@@ -242,18 +241,18 @@
     
     
     UIColor *color = [self randomColor];
-
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, color.CGColor);
-    CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
+    CGRect rect = CGRectMake(0.0f, 0.0f, canvasSize.width, canvasSize.height);
     CGContextFillRect(context, rect);
     
     
     // draw in context, you can use also drawInRect:withFont:
-    CGFloat fontSize = size.width * 0.6;
     UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:fontSize];//[UIFont systemFontOfSize:20.0];
     NSDictionary *attributesNew = @{NSFontAttributeName: font, NSForegroundColorAttributeName: [UIColor whiteColor]};
-    [text drawAtPoint:CGPointMake((size.width - fontSize + 6) / 2, (size.height - fontSize - 3) / 2) withAttributes:attributesNew];
+    CGSize textSize = [text sizeWithAttributes:attributesNew];
+    [text drawAtPoint:CGPointMake((canvasSize.width - textSize.width) / 2, (canvasSize.height - textSize.height) / 2) withAttributes:attributesNew];
     
     // transfer image
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
