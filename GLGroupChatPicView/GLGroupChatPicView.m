@@ -58,25 +58,51 @@
 - (void)addImage:(UIImage *)image withInitials:(NSString *)initials
 {
     if (self.images.count < 4) {
+        if (self.images.count == 3 && self.totalEntries > 4) {
+            NSString *totalStr = [NSString stringWithFormat:@"%ld", self.totalEntries];
+            if (totalStr) {
+                [self addInitials:totalStr];
+            }
+            return;
+        }
+        
+        
         self.totalCount++;
+        
         if (image) {
             [self.images addObject:image];
+            
         } else if (initials) {
             if (initials && initials.length) {
                 NSString *firstLetter = [[initials substringToIndex:1] capitalizedString];
                 [self addInitials:firstLetter];
             }
         }
+        
     } else {
-        if (self.totalCount >= 4) {
-            self.totalCount++;
-            NSString *firstLetter = [NSString stringWithFormat:@"%ld", self.totalCount];
-            if (firstLetter) {
+        if (self.totalEntries > 0) {
+            NSString *totalStr = [NSString stringWithFormat:@"%ld", self.totalEntries];
+            if (totalStr) {
                 [self.images removeLastObject];
-                [self addInitials:firstLetter];
+                [self addInitials:totalStr];
+            }
+            
+        } else {
+            if (self.totalCount >= 4) {
+                self.totalCount++;
+                NSString *totalStr = [NSString stringWithFormat:@"%ld", self.totalCount];
+                if (totalStr) {
+                    [self.images removeLastObject];
+                    [self addInitials:totalStr];
+                }
             }
         }
     }
+}
+
+- (void)addImageURL:(NSString *)imageURL withInitials:(NSString *)initials
+{
+    
 }
 
 - (void)addInitials:(NSString *)initials
@@ -105,6 +131,7 @@
 
 - (void)reset
 {
+    self.totalEntries = 0;
     self.totalCount = 0;
     [self.images removeAllObjects];
     [self resetLayers];
@@ -241,6 +268,7 @@
     
     
     UIColor *color = [self randomColor];
+    //UIColor *color = [UIColor colorWithRed:203 green:205 blue:207 alpha:1];
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, color.CGColor);
@@ -249,7 +277,7 @@
     
     
     // draw in context, you can use also drawInRect:withFont:
-    UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:fontSize];//[UIFont systemFontOfSize:20.0];
+    UIFont *font = [UIFont boldSystemFontOfSize:fontSize];//[UIFont fontWithName:@"AppleSDGothicNeo-Bold" size:fontSize];
     NSDictionary *attributesNew = @{NSFontAttributeName: font, NSForegroundColorAttributeName: [UIColor whiteColor]};
     CGSize textSize = [text sizeWithAttributes:attributesNew];
     [text drawAtPoint:CGPointMake((canvasSize.width - textSize.width) / 2, (canvasSize.height - textSize.height) / 2) withAttributes:attributesNew];

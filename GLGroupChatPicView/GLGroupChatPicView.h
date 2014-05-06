@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface GLGroupChatPicView : UIView
-- (void)addImage:(UIImage *)image withInitials:(NSString *)initials;
+@property (nonatomic, assign) NSUInteger totalEntries;
 
+- (void)addImage:(UIImage *)image withInitials:(NSString *)initials;
 - (void)updateLayout;
 - (void)reset;
 @end
