@@ -59,7 +59,7 @@
 {
     if (self.images.count < 4) {
         if (self.images.count == 3 && self.totalEntries > 4) {
-            NSString *totalStr = [NSString stringWithFormat:@"%ld", self.totalEntries];
+            NSString *totalStr = [NSString stringWithFormat:@"%ld", (long)self.totalEntries];
             if (totalStr) {
                 [self addInitials:totalStr];
             }
@@ -81,7 +81,7 @@
         
     } else {
         if (self.totalEntries > 0) {
-            NSString *totalStr = [NSString stringWithFormat:@"%ld", self.totalEntries];
+            NSString *totalStr = [NSString stringWithFormat:@"%ld", (long)self.totalEntries];
             if (totalStr) {
                 [self.images removeLastObject];
                 [self addInitials:totalStr];
@@ -90,7 +90,7 @@
         } else {
             if (self.totalCount >= 4) {
                 self.totalCount++;
-                NSString *totalStr = [NSString stringWithFormat:@"%ld", self.totalCount];
+                NSString *totalStr = [NSString stringWithFormat:@"%ld", (long)self.totalCount];
                 if (totalStr) {
                     [self.images removeLastObject];
                     [self addInitials:totalStr];
@@ -258,12 +258,13 @@
 
 - (UIImage *)imageFromText:(NSString *)text withCanvasSize:(CGSize)canvasSize andFontSize:(CGFloat)fontSize
 {
-    if (UIGraphicsBeginImageContextWithOptions) {
-        CGFloat imageScale = 0.0f;
-        UIGraphicsBeginImageContextWithOptions(canvasSize, NO, imageScale);
+    char majorVersion = [[[UIDevice currentDevice] systemVersion] characterAtIndex: 0];
+    if (majorVersion == '2' || majorVersion == '3') {
+        UIGraphicsBeginImageContext(self.frame.size);
     }
     else {
-        UIGraphicsBeginImageContext(self.frame.size);
+        CGFloat imageScale = 0.0f;
+        UIGraphicsBeginImageContextWithOptions(canvasSize, NO, imageScale);
     }
     
     
