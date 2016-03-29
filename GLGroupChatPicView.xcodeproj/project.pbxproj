@@ -281,7 +281,7 @@
 		C7C479E51910EECA00009699 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Gautam Lodhiya";
 				TargetAttributes = {
 					C7C47A0D1910EECB00009699 = {
@@ -427,6 +427,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -487,6 +488,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GLGroupChatPicView/GLGroupChatPicView-Prefix.pch";
 				INFOPLIST_FILE = "GLGroupChatPicView/GLGroupChatPicView-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.me.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = GLGroupChatPicView;
 				WRAPPER_EXTENSION = app;
 			};
@@ -500,6 +502,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GLGroupChatPicView/GLGroupChatPicView-Prefix.pch";
 				INFOPLIST_FILE = "GLGroupChatPicView/GLGroupChatPicView-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.me.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = GLGroupChatPicView;
 				WRAPPER_EXTENSION = app;
 			};
@@ -521,6 +524,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "GLGroupChatPicViewTests/GLGroupChatPicViewTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.me.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = GLGroupChatPicViewTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -539,6 +543,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GLGroupChatPicView/GLGroupChatPicView-Prefix.pch";
 				INFOPLIST_FILE = "GLGroupChatPicViewTests/GLGroupChatPicViewTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.me.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = GLGroupChatPicViewTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
